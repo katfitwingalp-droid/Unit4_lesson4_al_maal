@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>الْمَالُ - STD 4 UNIT 4 LESSON 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&family=Manjari:wght@400;700&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --primary: #FF5722;
+        --primary-light: #FF8A65;
+        --secondary: #4CAF50;
+        --accent: #FFC107;
+        --blue: #2196F3;
+        --purple: #9C27B0;
+        --teal: #009688;
+        --card-bg: #FFFFFF;
+        --text-color: #263238;
+        --shadow: 0 8px 20px rgba(0,0,0,0.15);
+        --radius: 20px;
+    }
+    * { box-sizing: border-box; user-select: none; -webkit-user-select: none; margin: 0; padding: 0; }
+    body {
+        background: linear-gradient(180deg, #FFF9C4 0%, #FFF8E1 50%, #FFFFFF 60%);
+        min-height: 100vh; overflow-x: hidden; color: var(--text-color); direction: rtl;
+        font-family: 'Manjari', 'Segoe UI', Tahoma, sans-serif;
+    }
+    .ar { font-family: 'Traditional Arabic','Scheherazade New','Amiri', serif; font-weight: 700; }
+    .ml { font-family: 'Manjari', sans-serif; font-weight: 700; }
+
+    #app { position: relative; z-index: 1; max-width: 1050px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; padding: 15px; }
+
+    header { background: rgba(255,255,255,0.97); padding: 12px 20px; border-radius: var(--radius); box-shadow: var(--shadow); display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; }
+    .logo-area { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+    .logo-area h1 { font-size: 1.3rem; color: var(--primary); font-weight: 800; }
+    .logo-area .sub { font-size: 0.8rem; color: #0277BD; font-family:'Manjari',sans-serif; font-weight:700; }
+    .logo-area span { font-size: 0.8rem; background: var(--accent); color: #333; padding: 3px 10px; border-radius: 12px; font-weight: bold; }
+    .stats-bar { display: flex; align-items: center; gap: 15px; background: #FFF9C4; padding: 8px 16px; border-radius: 30px; border: 2px solid #FBC02D; font-weight: bold; font-size: 1.05rem; }
+    .stat-item { display: flex; align-items: center; gap: 5px; }
+    .controls { display: flex; gap: 8px; }
+    .icon-btn { background: #FFF; border: 2px solid #E0E0E0; width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.1rem; cursor: pointer; box-shadow: 0 3px 6px rgba(0,0,0,0.1); }
+    .icon-btn:hover { transform: scale(1.1); }
+
+    .progress-container { width: 100%; background: rgba(255,255,255,0.6); height: 10px; border-radius: 10px; overflow: hidden; margin-bottom: 15px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); }
+    .progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg,#4CAF50,#8BC34A); transition: width .4s ease; }
+
+    .screen { display: none; flex-direction: column; align-items: center; width: 100%; flex: 1; animation: fadeIn .3s ease-in-out; }
+    .screen.active { display: flex; }
+    @keyframes fadeIn { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+
+    .home-card { background: rgba(255,255,255,0.95); border-radius: 25px; padding: 30px 20px; text-align: center; box-shadow: var(--shadow); width: 100%; max-width: 700px; margin: auto; border: 4px solid #FFF; }
+    .main-title { color: #2E7D32; font-size: 1.9rem; margin-bottom: 6px; }
+    .sub-title { color: #E65100; font-size: 1.6rem; margin-bottom: 8px; }
+    .author-tag { background: #E1F5FE; color: #0277BD; display: inline-block; padding: 4px 16px; border-radius: 20px; font-size: 0.95rem; margin-bottom: 22px; font-weight: bold; }
+
+    .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px,1fr)); gap: 14px; width: 100%; }
+    .btn-menu { padding: 16px 18px; border: none; border-radius: 20px; font-size: 1.1rem; font-weight: bold; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 6px 0 rgba(0,0,0,0.2); text-shadow: 1px 1px 2px rgba(0,0,0,0.3); transition: all .2s; }
+    .btn-menu:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(0,0,0,0.2); }
+    .b1{background:linear-gradient(135deg,#FF5722,#F4511E);} .b2{background:linear-gradient(135deg,#4CAF50,#43A047);}
+    .b3{background:linear-gradient(135deg,#2196F3,#1E88E5);} .b4{background:linear-gradient(135deg,#9C27B0,#8E24AA);}
+    .b5{background:linear-gradient(135deg,#009688,#00897B);} .b6{background:linear-gradient(135deg,#FF9800,#FB8C00);}
+    .b7{background:linear-gradient(135deg,#795548,#6D4C41);} .b8{background:linear-gradient(135deg,#607D8B,#546E7A);}
+    .b9{background:linear-gradient(135deg,#D32F2F,#C62828);}
+
+    .section-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; background: white; padding: 12px 20px; border-radius: 15px; box-shadow: var(--shadow); flex-wrap:wrap; gap:10px; }
+    .section-title { font-size: 1.3rem; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+    .back-btn { background: linear-gradient(135deg,#607D8B,#546E7A); color:white; border:none; padding:8px 20px; border-radius:20px; font-weight:bold; cursor:pointer; }
+
+    .content-box { background: rgba(255,255,255,0.97); border-radius: 22px; padding: 24px; box-shadow: var(--shadow); width: 100%; max-width: 850px; margin: 0 auto 20px; border: 3px solid #fff; }
+
+    /* Learn words */
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px,1fr)); gap: 18px; width: 100%; padding-bottom: 20px; }
+    .word-card { background: white; border-radius: 20px; padding: 14px; text-align: center; box-shadow: var(--shadow); border: 3px solid #FFF; transition: all .3s; cursor: pointer; display: flex; flex-direction: column; align-items: center; }
+    .word-card:hover { transform: translateY(-6px); border-color: var(--accent); }
+    .word-card.playing { animation: pulseCard .6s infinite alternate; border-color: var(--secondary); background:#F1F8E9; }
+    @keyframes pulseCard { from{transform:scale(1);} to{transform:scale(1.05);} }
+    .card-svg-container { width: 100px; height: 100px; display:flex; justify-content:center; align-items:center; margin-bottom:8px; }
+    .card-svg-container svg { width:100%; height:100%; }
+    .word-arabic { font-size: 1.6rem; margin-bottom: 6px; color: #1A237E; }
+    .word-meaning { font-size: 0.85rem; color:#555; margin-bottom:8px; font-family:'Manjari',sans-serif; font-weight:700; }
+    .replay-btn { background: #E8EAF6; color: #3F51B5; border: none; padding: 5px 12px; border-radius: 15px; font-size: 0.85rem; font-weight: bold; cursor:pointer; }
+
+    /* Poem reading */
+    .story-title { text-align:center; font-size:1.6rem; color:var(--primary); margin-bottom:16px; background:linear-gradient(90deg,#FFD54F,#FFB300); display:inline-block; padding:8px 30px; border-radius:30px; color:#fff; }
+    .story-title-wrap{ text-align:center; width:100%; margin-bottom:18px;}
+    .story-para { background:#FFF8E1; border-right:5px solid var(--accent); padding:14px 18px; border-radius:14px; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
+    .story-para.refrain { background:#FFECB3; border-right-color:#E65100; }
+    .story-para p { font-size:1.4rem; line-height:2.2; flex:1; min-width:250px; text-align:center; }
+    .mini-play { background: var(--blue); color:white; border:none; width:42px; height:42px; border-radius:50%; cursor:pointer; font-size:1.1rem; flex-shrink:0; }
+    .read-all-btn { background: linear-gradient(135deg,#FF5722,#E64A19); color:white; border:none; padding:12px 30px; border-radius:25px; font-size:1.1rem; font-weight:bold; cursor:pointer; margin-bottom:18px; box-shadow:0 4px 10px rgba(255,87,34,.4); }
+    .video-btn { background: linear-gradient(135deg,#D32F2F,#B71C1C); color:white; border:none; padding:12px 30px; border-radius:25px; font-size:1.1rem; font-weight:bold; cursor:pointer; margin-bottom:18px; margin-right:10px; box-shadow:0 4px 10px rgba(211,47,47,.4); text-decoration:none; display:inline-flex; align-items:center; gap:8px; }
+    .btn-row { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; }
+    .poet-tag { text-align:center; font-size:1rem; color:#795548; margin-top:6px; margin-bottom:14px; font-family:'Manjari',sans-serif; font-weight:700; }
+
+    /* Activities */
+    .activity-block { background:#FFF8E1; border:2px solid #FFE082; border-radius:18px; padding:20px; margin-bottom:22px; width:100%; }
+    .activity-heading { color:#E65100; font-size:1.2rem; margin-bottom:14px; font-weight:bold; }
+    .activity-sub { color:#795548; font-size:0.95rem; margin-bottom:12px; font-family:'Manjari',sans-serif; font-weight:700; }
+    .activity-line { font-size:1.3rem; line-height:2.4; margin-bottom:10px; }
+    .qa-row { display:flex; align-items:center; gap:12px; margin-bottom:12px; flex-wrap:wrap; }
+    .qa-row .qtxt { flex:1; min-width:240px; font-size:1.25rem; }
+    .fillbox { border:2px solid #90A4AE; border-radius:10px; padding:6px 14px; font-size:1.2rem; font-family:'Traditional Arabic','Scheherazade New',serif; font-weight:700; min-width:120px; text-align:center; background:white; }
+    select.fillbox { cursor:pointer; }
+    textarea.fillbox { width:100%; min-height:60px; font-size:1.2rem; resize:vertical; direction:rtl; text-align:right; }
+    .check-btn { background:var(--secondary); color:white; border:none; padding:8px 22px; border-radius:20px; font-weight:bold; cursor:pointer; margin-top:8px; }
+    .word-bank { background:#E1F5FE; border-radius:12px; padding:10px 16px; margin-bottom:14px; font-size:1.2rem; display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+    .word-bank span { background:white; padding:5px 14px; border-radius:14px; border:2px solid #4FC3F7; }
+    .result-msg { font-weight:bold; margin-top:8px; font-size:1.05rem; }
+    .model-answer-box { background:#F3E5F5; border:2px solid #CE93D8; border-radius:14px; padding:14px 18px; margin-top:10px; font-size:1.2rem; line-height:2; }
+    .model-answer-label { font-family:'Manjari',sans-serif; font-weight:700; color:#6A1B9A; font-size:0.95rem; margin-bottom:6px; }
+    .poem-substitute-box { background:#E8F5E9; border:2px dashed #66BB6A; border-radius:14px; padding:14px 18px; margin-bottom:14px; text-align:center; font-size:1.35rem; }
+
+    /* Fil/Fail & grammar table */
+    table.gtable { width:100%; border-collapse: collapse; background:white; border-radius:12px; overflow:hidden; margin-top:10px; }
+    .gtable th { background: var(--teal); color:white; padding:12px; font-size:1.1rem; }
+    .gtable td { padding:12px; text-align:center; border-bottom:1px solid #eee; font-size:1.3rem; }
+    .gtable input, .gtable select { font-size:1.2rem; padding:6px; border-radius:8px; border:2px solid #B0BEC5; text-align:center; width:90%; font-family:'Traditional Arabic','Scheherazade New',serif; font-weight:700;}
+
+    /* Games (reused style) */
+    .game-box { background: rgba(255,255,255,0.95); border-radius: 25px; padding: 25px; box-shadow: var(--shadow); width: 100%; max-width: 750px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; border: 4px solid #FFF; }
+    .game-instruction { font-size: 1.15rem; color: #37474F; margin-bottom: 20px; text-align: center; background: #E0F2F1; padding: 8px 20px; border-radius: 20px; font-weight: bold; }
+    .g1-image-box { width: 170px; height: 170px; background: #F5F5F5; border-radius: 20px; display: flex; justify-content: center; align-items: center; margin-bottom: 22px; border: 3px solid #E0E0E0; padding: 10px; }
+    .options-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; width: 100%; max-width: 480px; }
+    .option-btn { background:#FFF; border:3px solid #81D4FA; padding:14px; border-radius:18px; font-size:1.5rem; font-weight:bold; color:#0277BD; cursor:pointer; box-shadow:0 4px 0 #4FC3F7; }
+    .option-btn:hover { background:#E1F5FE; }
+    .option-btn.correct { background:#C8E6C9 !important; border-color:#4CAF50 !important; color:#2E7D32 !important; box-shadow:0 4px 0 #388E3C !important; }
+    .option-btn.wrong { background:#FFCDD2 !important; border-color:#F44336 !important; color:#C62828 !important; box-shadow:0 4px 0 #D32F2F !important; }
+    .match-container { display:flex; justify-content:space-between; width:100%; gap:18px; margin-bottom:18px; }
+    .match-column { display:flex; flex-direction:column; gap:14px; flex:1; }
+    .match-item { background:white; border:3px solid #CFD8DC; border-radius:15px; padding:10px; display:flex; align-items:center; justify-content:center; min-height:78px; cursor:pointer; }
+    .match-item:hover { border-color:var(--blue); background:#E3F2FD; }
+    .match-item.selected { border-color:var(--accent); background:#FFF8E1; }
+    .match-item.matched { border-color:var(--secondary); background:#E8F5E9; opacity:.6; pointer-events:none; }
+    .match-item .svg-thumb { width:56px; height:56px; }
+    .match-item .text-thumb { font-size:1.5rem; font-weight:bold; }
+    .missing-word-display { font-size:2.6rem; font-weight:bold; color:#1565C0; background:#E3F2FD; padding:14px 36px; border-radius:20px; margin-bottom:22px; border:2px dashed #2196F3; }
+    .letters-options { display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+    .letter-btn { background:white; border:3px solid #BA68C8; width:64px; height:64px; border-radius:50%; font-size:1.7rem; font-weight:bold; color:#6A1B9A; display:flex; justify-content:center; align-items:center; cursor:pointer; box-shadow:0 5px 0 #9C27B0; }
+    .target-pic { width:110px; height:110px; margin-bottom:14px; }
+    .drop-slots { display:flex; gap:8px; margin-bottom:22px; }
+    .letter-slot { width:58px; height:58px; border:3px dashed #B0BEC5; background:#ECEFF1; border-radius:14px; display:flex; justify-content:center; align-items:center; font-size:1.7rem; font-weight:bold; }
+    .scrambled-letters { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+    .tile-btn { width:54px; height:54px; background:#FFE082; border:2px solid #FFB300; border-radius:12px; font-size:1.6rem; font-weight:bold; color:#E65100; display:flex; justify-content:center; align-items:center; cursor:pointer; box-shadow:0 4px 0 #FFA000; }
+
+    /* Quiz */
+    .quiz-q { background:white; border-radius:16px; padding:16px 20px; margin-bottom:16px; box-shadow:0 3px 10px rgba(0,0,0,.08); border-right:5px solid var(--blue); }
+    .quiz-q .qtext { font-size:1.25rem; margin-bottom:12px; font-weight:bold; }
+    .quiz-opts { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+    .quiz-opt { background:#F5F5F5; border:2px solid #E0E0E0; border-radius:12px; padding:10px; cursor:pointer; text-align:center; font-size:1.15rem; }
+    .quiz-opt.picked { border-color:var(--blue); background:#E3F2FD; }
+    .quiz-opt.correct-ans { border-color:#4CAF50; background:#C8E6C9; }
+    .quiz-opt.wrong-ans { border-color:#F44336; background:#FFCDD2; }
+    .submit-quiz-btn { background:linear-gradient(135deg,#FF5722,#E64A19); color:white; border:none; padding:14px 40px; border-radius:25px; font-size:1.2rem; font-weight:bold; cursor:pointer; margin-top:10px; box-shadow:0 4px 10px rgba(255,87,34,.4); }
+    .quiz-score-box { background:#FFF9C4; border:2px solid #FBC02D; border-radius:18px; padding:18px; text-align:center; font-size:1.3rem; font-weight:bold; margin-bottom:18px; }
+
+    /* Vocabulary / grammar tables */
+    table.vocab-table { width:100%; border-collapse:collapse; }
+    .vocab-table th { background:var(--purple); color:white; padding:10px; font-size:1.05rem; }
+    .vocab-table td { padding:10px; border-bottom:1px solid #eee; font-size:1.2rem; text-align:center; }
+    .vocab-table tr:nth-child(even){ background:#FAFAFA; }
+    .grammar-note { background:#E1F5FE; border-radius:14px; padding:16px 20px; margin-bottom:18px; font-size:1.15rem; line-height:1.8; }
+
+    .modal-overlay { position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,.7); z-index:100; display:none; justify-content:center; align-items:center; padding:20px; }
+    .modal-overlay.active { display:flex; }
+    .reward-card { background:white; border-radius:30px; padding:30px; text-align:center; max-width:480px; width:100%; box-shadow:0 20px 40px rgba(0,0,0,.3); border:5px solid #FFD54F; }
+    .reward-icon { font-size:3.6rem; margin-bottom:10px; }
+    .reward-title { color:#2E7D32; font-size:2rem; margin-bottom:8px; }
+    .reward-subtitle { color:#E65100; font-size:1.2rem; margin-bottom:18px; }
+    .primary-action-btn { background:linear-gradient(135deg,#FF5722,#E64A19); color:white; border:none; padding:12px 28px; border-radius:25px; font-size:1.1rem; font-weight:bold; cursor:pointer; }
+
+    .instructions-list { text-align:right; line-height:1.9; font-size:1.05rem; background:#F5F5F5; padding:20px; border-radius:15px; width:100%; font-family:'Manjari',sans-serif; font-weight:700; }
+    .instructions-list ul { list-style:none; }
+    .moral-box { background: linear-gradient(135deg,#FFF3E0,#FFE0B2); border:2px dashed #FB8C00; border-radius:16px; padding:16px 20px; margin-top:10px; font-size:1.2rem; text-align:center; }
+    .note-tag { display:inline-block; background:#FFECB3; color:#795548; font-size:0.85rem; padding:3px 10px; border-radius:10px; margin-top:6px; font-family:'Manjari',sans-serif; font-weight:700; }
+
+    @media (max-width:600px){
+        .main-title{font-size:1.5rem;} .sub-title{font-size:1.2rem;}
+        .options-grid{grid-template-columns:1fr;} .match-container{flex-direction:column;}
+        .quiz-opts{grid-template-columns:1fr;}
+        .story-para p{font-size:1.2rem;}
+    }
+</style>
+</head>
+<body>
+<div id="app">
+    <header>
+        <div class="logo-area" onclick="showScreen('homeScreen')">
+            <div style="font-size:1.8rem;">🐷</div>
+            <div>
+                <h1 class="ar">اللغة العربية</h1>
+                <span>STD 4 · UNIT 4 · LESSON 4</span>
+                <div class="sub ml">നാലാം ക്ലാസ് • യൂണിറ്റ് 4 • പാഠം 4</div>
+            </div>
+        </div>
+        <div class="stats-bar">
+            <div class="stat-item">⭐ <span id="valScore">0</span></div>
+            <div class="stat-item">❤️ <span id="valLives">3</span></div>
+            <div class="stat-item">🏆 <span id="valStars">0</span></div>
+        </div>
+        <div class="controls">
+            <button class="icon-btn" id="btnAudioToggle" onclick="toggleAudio()">🔊</button>
+            <button class="icon-btn" onclick="toggleFullscreen()">⛶</button>
+            <button class="icon-btn" onclick="showScreen('homeScreen')">🏠</button>
+        </div>
+    </header>
+
+    <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+
+    <!-- HOME -->
+    <div id="homeScreen" class="screen active">
+        <div class="home-card">
+            <h1 class="main-title ar">الْوَحْدَةُ الرَّابِعَةُ</h1>
+            <h2 class="sub-title ar">٤) الْمَالُ</h2>
+            <div class="author-tag ml">STD 4 - UNIT 4 - LESSON 4 : مَنْظُومٌ (Poem)</div>
+            <div class="menu-grid">
+                <button class="btn-menu b1" onclick="showScreen('readingScreen')">📖 Read the Poem</button>
+                <button class="btn-menu b2" onclick="showScreen('learnScreen')">🗂️ Learn Words</button>
+                <button class="btn-menu b6" onclick="showScreen('activitiesScreen')">📝 Activities</button>
+                <button class="btn-menu b3" onclick="showScreen('gamesMenuScreen')">🎮 Play Games</button>
+                <button class="btn-menu b4" onclick="showScreen('quizScreen')">❓ Quiz (15)</button>
+                <button class="btn-menu b7" onclick="showScreen('vocabScreen')">📚 Vocabulary</button>
+                <button class="btn-menu b5" onclick="showScreen('grammarScreen')">🔤 Grammar</button>
+                <button class="btn-menu b8" onclick="showScreen('instructionsScreen')">ℹ️ Instructions</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- READING (POEM) -->
+    <div id="readingScreen" class="screen">
+        <div class="section-header">
+            <div class="section-title ar">📖 نُنْشِدُ الْمَنْظُومَةَ</div>
+            <button class="back-btn" onclick="showScreen('homeScreen')">Back</button>
+        </div>
+        <div class="content-box">
+            <div class="story-title-wrap"><span class="story-title ar">الْمَالُ</span></div>
+            <div class="btn-row">
+                <button class="read-all-btn" onclick="readAllStory()">🔊 Read All / Stop</button>
+                <a class="video-btn" href="#" onclick="window.open(videoSearchUrl(),'_blank'); return false;">🎥 Search Related Video</a>
+            </div>
+            <div id="storyContainer"></div>
+            <div class="poet-tag ar">✍️ الشَّاعِرُ: مُحَمَّد الْفَاضِل سُلَيْمَان</div>
+            <div class="moral-box ar">🌟 الْعِبْرَةُ: نَحْتَفِظُ بِنُقُودِنَا فِي حَصَّالَةٍ أَمِينَةٍ، وَنَفْخَرُ بِثَرْوَتِنَا الَّتِي جَمَعْنَاهَا بِأَنْفُسِنَا</div>
+        </div>
+    </div>
+
+    <!-- LEARN WORDS -->
+    <div id="learnScreen" class="screen">
+        <div class="section-header">
+            <div class="section-title ar">🗂️ نَتَعَلَّمُ الْكَلِمَاتِ</div>
+            <button class="back-btn" onclick="showScreen('homeScreen')">Back</button>
+        </div>
+        <div class="content-box">
+            <div class="cards-grid" id="learnCardsGrid"></div>
+        </div>
+    </div>
+
+    <!-- ACTIVITIES -->
+    <div id="activitiesScreen" class="screen">
+        <div class="section-header">
+            <div class="section-title ar">📝 نَشَاطَاتٌ</div>
+            <button class="back-btn" onclick="showScreen('homeScreen')">Back</button>
+        </div>
+        <div class="content-box" id="activitiesContainer"></div>
+    </div>
+
+    <!-- GAMES MENU -->
+    <div id="gamesMenuScreen" class="screen">
+        <div class="section-header">
+            <div class="section-title ar">🎮 اِخْتَرْ نَشَاطًا</div>
+            <button class="back-btn" onclick="showScreen('homeScreen')">Back</button>
+        </div>
+        <div class="menu-grid" style="max-width:600px; margin:10px auto;">
+            <button class="btn-menu b1" onclick="launchGame(1)">1. Guess the Picture</button>
+            <button class="btn-menu b2" onclick="launchGame(2)">2. Match the Picture</button>
+            <button class="btn-menu b3" onclick="launchGame(3)">3. Find Missing Letter</button>
+            <button class="btn-menu b4" onclick="launchGame(4)">4. Arrange the Letters</button>
+        </div>
+    </div>
+
+    <div id="game1Screen" class="screen"><div class="game-box">
+        <div class="game-instruction ar">🎮 خَمِّنِ الْكَلِمَةَ الصَّحِيحَةَ!</div>
+        <div class="g1-image-box" id="g1ImgBox"></div>
+        <div class="options-grid" id="g1OptionsGrid"></div>
+    </div></div>
+
+    <div id="game2Screen" class="screen"><div class="game-box">
+        <div class="game-instruction ar">🔗 طَابِقْ بَيْنَ الصُّورَةِ وَالْكَلِمَةِ!</div>
+        <div class="match-container"><div class="match-column" id="g2PicsCol"></div><div class="match-column" id="g2WordsCol"></div></div>
+    </div></div>
+
+    <div id="game3Screen" class="screen"><div class="game-box">
+        <div class="game-instruction ar">🔍 جِدِ الْحَرْفَ النَّاقِصَ!</div>
+        <div class="g1-image-box" id="g3ImgBox"></div>
+        <div class="missing-word-display ar" id="g3WordDisplay"></div>
+        <div class="letters-options" id="g3LettersGrid"></div>
+    </div></div>
+
+    <div id="game4Screen" class="screen"><div class="game-box">
+        <div class="game-instruction ar">🧩 رَتِّبِ الْحُرُوفَ!</div>
+        <div class="target-pic" id="g4ImgBox"></div>
+        <div class="drop-slots" id="g4Slots"></div>
+        <div class="scrambled-letters" id="g4Tiles"></div>
+    </div></div>
+
+    <!-- QUIZ -->
+    <div id="quizScreen" class="screen">
+        <div class="section-header">
+            <div class="section-title ar">❓ اِخْتَبَارٌ (15 سُؤَالًا)</div>
+            <button class="back-btn" onclick="showScreen('homeScreen')">Back</button>
+        </div>
+        <div class="content-box">
+            <div id="quizScoreBox" style="display:none;" class="quiz-score-box"></div>
+            <div id="quizContainer"></div>
+            <div style="text-align:center;"><button class="submit-quiz-btn" onclick="submitQuiz()">✅ Submit Answers</button></div>
+        </div>
+    </div>
+
+    <!-- VOCAB -->
+    <div id="vocabScreen" class="screen">
+        <div class="section-header">
+            <div class="section-title ar">📚 مُعْجَمُ الْمُفْرَدَاتِ</div>
+            <button class="back-btn" onclick="showScreen('homeScreen')">Back</button>
+        </div>
+        <div class="content-box">
+            <table class="vocab-table"><thead><tr><th class="ar">الكلمة</th><th>Meaning (മലയാളം)</th></tr></thead><tbody id="vocabTableBody"></tbody></table>
+            <div class="note-tag ml">* ചില വാക്കുകളുടെ അർത്ഥങ്ങൾ അധ്യാപകസഹായത്തിനായി നൽകിയവയാണ്</div>
+        </div>
+    </div>
+
+    <!-- GRAMMAR -->
+    <div id="grammarScreen" class="screen">
+        <div class="section-header">
+            <div class="section-title ar">🔤 الصِّفَةُ الْمُؤَنَّثَةُ (Feminine Adjectives)</div>
+            <button class="back-btn" onclick="showScreen('homeScreen')">Back</button>
+        </div>
+        <div class="content-box">
+            <div class="grammar-note ml">
+                الْمَالُ എന്ന കവിതയിൽ حَصَّالَة (piggy bank) എന്ന സ്ത്രീലിംഗ (مُؤَنَّث) നാമത്തെ വിശേഷിപ്പിക്കാൻ കവി പല صِفَة (adjectives) ഉപയോഗിച്ചു. ഈ വിശേഷണങ്ങൾ എല്ലാം تَاء مربوطة (ة) കൊണ്ട് അവസാനിക്കുന്നു, കാരണം موصوف (visited noun) സ്ത്രീലിംഗമാണ്.
+            </div>
+            <table class="gtable">
+                <thead><tr><th class="ar">الْمَوْصُوفُ (Noun)</th><th class="ar">الصِّفَةُ (Adjective)</th><th>Meaning</th></tr></thead>
+                <tbody>
+                    <tr><td class="ar">حَصَّالَةٌ</td><td class="ar">ثَرِيَّة</td><td>wealthy</td></tr>
+                    <tr><td class="ar">حَصَّالَةٌ</td><td class="ar">َكرِيمَة</td><td>generous</td></tr>
+                    <tr><td class="ar">حَصَّالَةٌ</td><td class="ar">سَخِيَّة</td><td>giving</td></tr>
+                    <tr><td class="ar">حَصَّالَةٌ</td><td class="ar">أَمِينَةٌ</td><td>trustworthy</td></tr>
+                    <tr><td class="ar">حَصَّالَةٌ</td><td class="ar">وَفِيَّة</td><td>loyal</td></tr>
+                </tbody>
+            </table>
+            <h3 class="ar" style="margin:20px 0 10px; color:var(--primary);">نَخْتَارُ الصِّفَةَ الْمُنَاسِبَةَ (Choose the correct feminine adjective)</h3>
+            <table class="gtable" id="grammarPracticeTable">
+                <thead><tr><th class="ar">الْمَوْصُوفُ</th><th class="ar">الصِّفَةُ</th></tr></thead>
+                <tbody>
+                    <tr><td class="ar">مَدْرَسَةٌ ...........</td>
+                        <td><select class="fillbox gpSel" data-ans="َكبِيرَة"><option value="">---</option><option class="ar">َكبِيرَة</option><option class="ar">َكبِير</option><option class="ar">َكبِيرُون</option></select></td></tr>
+                    <tr><td class="ar">بِنْتٌ ...........</td>
+                        <td><select class="fillbox gpSel" data-ans="مُجْتَهِدَة"><option value="">---</option><option class="ar">مُجْتَهِد</option><option class="ar">مُجْتَهِدَة</option><option class="ar">مُجْتَهِدُون</option></select></td></tr>
+                    <tr><td class="ar">حَصَّالَةٌ ...........</td>
+                        <td><select class="fillbox gpSel" data-ans="أَمِينَة"><option value="">---</option><option class="ar">أَمِين</option><option class="ar">أَمِينَة</option><option class="ar">أُمَنَاء</option></select></td></tr>
+                    <tr><td class="ar">شَجَرَةٌ ...........</td>
+                        <td><select class="fillbox gpSel" data-ans="طَوِيلَة"><option value="">---</option><option class="ar">طَوِيل</option><option class="ar">طَوِيلَة</option><option class="ar">طِوَال</option></select></td></tr>
+                </tbody>
+            </table>
+            <button class="check-btn" onclick="checkGrammarTable()">Check Answers</button>
+            <div class="result-msg" id="grammarResultMsg"></div>
+        </div>
+    </div>
+
+    <!-- INSTRUCTIONS -->
+    <div id="instructionsScreen" class="screen">
+        <div class="section-header">
+            <div class="section-title">ℹ️ Instructions</div>
+            <button class="back-btn" onclick="showScreen('homeScreen')">Back</button>
+        </div>
+        <div class="content-box">
+            <div class="instructions-list">
+                <ul>
+                    <li>• 📖 "Read the Poem" ൽ ഓരോ വരിയും 🔊 ബട്ടൺ അമർത്തി കേൾക്കാം. 🎥 ബട്ടൺ വഴി ബന്ധപ്പെട്ട വീഡിയോകൾ യൂട്യൂബിൽ തിരയാം.</li>
+                    <li>• 🗂️ "Learn Words" ൽ ഓരോ കാർഡിലും ക്ലിക്ക് ചെയ്താൽ ഉച്ചാരണം കേൾക്കാം.</li>
+                    <li>• 📝 "Activities" ൽ കവിതയിലെ ചോദ്യങ്ങൾക്ക് ഉത്തരം എഴുതുകയോ പദപകരം ചെയ്യുകയോ ചെയ്ത് Check ബട്ടൺ അമർത്തുക.</li>
+                    <li>• 🎮 "Play Games" ൽ 4 തരം ഗെയിമുകൾ ഉണ്ട്.</li>
+                    <li>• ❓ "Quiz" ൽ 15 ചോദ്യങ്ങൾക്ക് ഉത്തരം നൽകി Submit ചെയ്യുക.</li>
+                    <li>• 📚 "Vocabulary", 🔤 "Grammar" എന്നിവയിൽ പ്രധാന വാക്കുകളും സ്ത്രീലിംഗ വിശേഷണങ്ങളും പഠിക്കാം.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="rewardModal">
+    <div class="reward-card">
+        <div class="reward-icon">🏅</div>
+        <h2 class="reward-title">Excellent! 🎉</h2>
+        <p class="reward-subtitle">You completed this activity!</p>
+        <button class="primary-action-btn" onclick="closeRewardModal()">Continue</button>
+    </div>
+</div>
+
+<script>
+/* ============== VOCABULARY DATABASE (concrete words, for games) ============== */
+const VOCABULARY = [
+ { id:'hassala', word:'حَصَّالَةٌ', meaning:'സമ്പാദ്യപ്പെട്ടി', letters:['ح','ص','ا','ل','ة'], missingLetter:'ح', missingDisplay:'ِ_َصَّالَةٌ',
+   svg:`<svg viewBox="0 0 100 100"><ellipse cx="50" cy="60" rx="38" ry="28" fill="#F48FB1"/><circle cx="82" cy="55" r="8" fill="#F48FB1"/><rect x="18" y="30" width="8" height="10" rx="2" fill="#EC407A"/><rect x="22" y="35" width="10" height="10" rx="2" fill="#EC407A"/><rect x="42" y="42" width="16" height="4" rx="2" fill="#AD1457"/><circle cx="35" cy="55" r="3" fill="#333"/><rect x="30" y="82" width="8" height="10" fill="#EC407A"/><rect x="62" y="82" width="8" height="10" fill="#EC407A"/></svg>` },
+ { id:'tharwa', word:'ثَرْوَةٌ', meaning:'സമ്പത്ത്', letters:['ث','ر','و','ة'], missingLetter:'ث', missingDisplay:'ِ_َرْوَةٌ',
+   svg:`<svg viewBox="0 0 100 100"><rect x="20" y="55" width="60" height="16" rx="3" fill="#FFD54F" stroke="#F9A825" stroke-width="2"/><rect x="25" y="40" width="50" height="16" rx="3" fill="#FFCA28" stroke="#F9A825" stroke-width="2"/><rect x="30" y="25" width="40" height="16" rx="3" fill="#FFD54F" stroke="#F9A825" stroke-width="2"/><text x="50" y="52" font-size="12" text-anchor="middle" fill="#795548">$</text></svg>` },
+ { id:'nuqud', word:'نُقُودٌ', meaning:'നാണയങ്ങൾ', letters:['ن','ق','و','د'], missingLetter:'ن', missingDisplay:'ِ_ُقُودٌ',
+   svg:`<svg viewBox="0 0 100 100"><circle cx="35" cy="60" r="20" fill="#FFD54F" stroke="#F9A825" stroke-width="3"/><circle cx="60" cy="45" r="20" fill="#FFCA28" stroke="#F9A825" stroke-width="3"/><circle cx="65" cy="70" r="20" fill="#FFD54F" stroke="#F9A825" stroke-width="3"/><text x="60" y="50" font-size="16" text-anchor="middle" fill="#795548">$</text></svg>` },
+ { id:'qalb', word:'قَلْبٌ', meaning:'ഹൃദയം', letters:['ق','ل','ب'], missingLetter:'ق', missingDisplay:'ِ_َلْبٌ',
+   svg:`<svg viewBox="0 0 100 100"><path d="M50,85 C10,55 20,20 50,38 C80,20 90,55 50,85Z" fill="#E53935"/></svg>` },
+ { id:'fakhar', word:'فَخَّارٌ', meaning:'മൺപാത്രം', letters:['ف','خ','ا','ر'], missingLetter:'ف', missingDisplay:'ِ_َخَّارٌ',
+   svg:`<svg viewBox="0 0 100 100"><path d="M35,30 Q30,55 35,80 Q50,92 65,80 Q70,55 65,30 Z" fill="#BF6136"/><ellipse cx="50" cy="30" rx="16" ry="6" fill="#A0522D"/><rect x="30" y="24" width="40" height="8" rx="4" fill="#8D5524"/></svg>` },
+ { id:'sadr', word:'صَدْرٌ', meaning:'നെഞ്ച്', letters:['ص','د','ر'], missingLetter:'ص', missingDisplay:'ِ_َدْرٌ',
+   svg:`<svg viewBox="0 0 100 100"><circle cx="50" cy="28" r="15" fill="#FFCC80"/><path d="M30,50 Q50,40 70,50 L75,90 Q50,100 25,90 Z" fill="#42A5F5"/><path d="M40,55 C46,48 54,48 60,55" stroke="#1565C0" stroke-width="2" fill="none"/></svg>` },
+ { id:'ikhwa', word:'إخْوَةٌ', meaning:'സഹോദരങ്ങൾ', letters:['إ','خ','و','ة'], missingLetter:'إ', missingDisplay:'ِ_ْخْوَةٌ',
+   svg:`<svg viewBox="0 0 100 100"><circle cx="32" cy="30" r="13" fill="#FFCC80"/><rect x="18" y="42" width="28" height="34" rx="8" fill="#66BB6A"/><circle cx="68" cy="34" r="13" fill="#FFCC80"/><rect x="54" y="46" width="28" height="30" rx="8" fill="#42A5F5"/></svg>` },
+ { id:'amana', word:'أَمَانَةٌ', meaning:'വിശ്വസ്തത', letters:['أ','م','ا','ن','ة'], missingLetter:'أ', missingDisplay:'ِ_َمَانَةٌ',
+   svg:`<svg viewBox="0 0 100 100"><rect x="30" y="45" width="40" height="35" rx="6" fill="#78909C"/><path d="M38,45 v-10 a12,12 0 0,1 24,0 v10" stroke="#546E7A" stroke-width="6" fill="none"/><circle cx="50" cy="62" r="6" fill="#37474F"/></svg>` },
+ { id:'karam', word:'َكرَمٌ', meaning:'ഔദാര്യം', letters:['ك','ر','م'], missingLetter:'ك', missingDisplay:'ِ_َرَمٌ',
+   svg:`<svg viewBox="0 0 100 100"><rect x="25" y="45" width="50" height="40" rx="4" fill="#AB47BC"/><rect x="20" y="35" width="60" height="14" rx="4" fill="#8E24AA"/><rect x="45" y="35" width="10" height="50" fill="#FFD54F"/><path d="M50,35 Q35,20 50,15 Q65,20 50,35" fill="#FFD54F"/></svg>` },
+ { id:'farah', word:'فَرَحٌ', meaning:'സന്തോഷം', letters:['ف','ر','ح'], missingLetter:'ف', missingDisplay:'ِ_َرَحٌ',
+   svg:`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="#FFEB3B"/><circle cx="36" cy="42" r="5" fill="#5D4037"/><circle cx="64" cy="42" r="5" fill="#5D4037"/><path d="M30,60 Q50,80 70,60" stroke="#5D4037" stroke-width="5" fill="none"/></svg>` }
+];
+
+/* Poem lines with roles (all narrator) for TTS + reading screen */
+const STORY = [
+ {refrain:true, text:'حَصَّالَتِي حَصَّالَتِي فِيهَا جَمَعْتُ ثَرْوَتِي'},
+ {refrain:false, text:'حَصَّالَتِي ثَرِيَّة َكرِيمَة سَخِيَّة'},
+ {refrain:false, text:'أَمِينَةٌ وَفِيَّة بِهَا أُبَاهِي إخْوَتِي'},
+ {refrain:false, text:'فَخَّارُهَا عَجِيبٌ وَصَدْرُهَا رَحِيبٌ'},
+ {refrain:true, text:'حَصَّالَتِي حَصَّالَتِي نَفْسِي لَهَا تَطِيبُ'},
+ {refrain:false, text:'نُقُودُهَا تَرِنُّ قَلْبِي لَهَا يَحِنُّ'},
+ {refrain:true, text:'حَصَّالَتِي حَصَّالَتِي فِيهَا جَمَعْتُ ثَرْوَتِي'}
+];
+
+/* Vocabulary meaning list for vocab screen (poem words; * = supplementary gloss) */
+const VOCAB_LIST = [
+ ['حَصَّالَةٌ','piggy / money box','സമ്പാദ്യപ്പെട്ടി'],['ثَرْوَةٌ','wealth *','സമ്പത്ത് *'],
+ ['َكرِيمَةٌ','generous *','ഉദാരമായ *'],['سَخِيَّةٌ','giving / generous *','ഉദാരമനസ്കയായ *'],
+ ['أَمِينَةٌ','trustworthy *','വിശ്വസ്തയായ *'],['وَفِيَّةٌ','loyal / faithful *','കൂറുള്ള *'],
+ ['أُبَاهِي','I boast / take pride *','ഞാൻ അഭിമാനിക്കുന്നു *'],['فَخَّارٌ','pottery / clay','മൺപാത്രം'],
+ ['عَجِيبٌ','wonderful *','അത്ഭുതകരമായ *'],['صَدْرٌ','chest','നെഞ്ച്'],
+ ['رَحِيبٌ','spacious / wide *','വിശാലമായ *'],['تَطِيبُ','becomes pleasant *','സന്തോഷിക്കുന്നു *'],
+ ['نُقُودٌ','money / coins','നാണയങ്ങൾ'],['تَرِنُّ','jingles / rings *','കിലുങ്ങുന്നു *'],
+ ['يَحِنُّ','longs for / yearns *','കൊതിക്കുന്നു *']
+];
+
+let state = { score:0, lives:3, stars:0, audioEnabled:true, activeGame:null, currentGameIndex:0, gameQueue:[], quizScore:0, quizSubmitted:false };
+
+/* Video search helper */
+function videoSearchUrl(){
+  const q = 'المال حصالتي منظوم محمد الفاضل سليمان الصف الرابع أنشودة أطفال Arabic poem piggy bank kids';
+  return 'https://www.youtube.com/results?search_query=' + encodeURIComponent(q);
+}
+
+/* Audio */
+let audioCtx=null;
+function initAudio(){ if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)(); }
+function playSound(type){
+  if(!state.audioEnabled) return; initAudio();
+  const osc=audioCtx.createOscillator(), gain=audioCtx.createGain();
+  osc.connect(gain); gain.connect(audioCtx.destination);
+  const now=audioCtx.currentTime;
+  if(type==='correct'){ osc.type='sine'; osc.frequency.setValueAtTime(523.25,now); osc.frequency.exponentialRampToValueAtTime(783.99,now+0.3); gain.gain.setValueAtTime(0.3,now); gain.gain.exponentialRampToValueAtTime(0.01,now+0.4); osc.start(now); osc.stop(now+0.4); }
+  else if(type==='wrong'){ osc.type='sawtooth'; osc.frequency.setValueAtTime(220,now); osc.frequency.linearRampToValueAtTime(130,now+0.3); gain.gain.setValueAtTime(0.3,now); gain.gain.exponentialRampToValueAtTime(0.01,now+0.35); osc.start(now); osc.stop(now+0.35); }
+  else if(type==='click'){ osc.type='triangle'; osc.frequency.setValueAtTime(400,now); gain.gain.setValueAtTime(0.15,now); gain.gain.exponentialRampToValueAtTime(0.01,now+0.08); osc.start(now); osc.stop(now+0.08); }
+  else if(type==='fanfare'){ [523.25,659.25,783.99,1046.5].forEach((f,i)=>{ const o=audioCtx.createOscillator(), g=audioCtx.createGain(); o.connect(g); g.connect(audioCtx.destination); o.frequency.setValueAtTime(f, now+i*0.12); g.gain.setValueAtTime(0.2, now+i*0.12); g.gain.exponentialRampToValueAtTime(0.01, now+i*0.12+0.3); o.start(now+i*0.12); o.stop(now+i*0.12+0.3); }); }
+}
+let currentUtterance = null;
+function speakArabic(text, onend){
+  if(!state.audioEnabled) return;
+  if('speechSynthesis' in window){
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang='ar-SA'; u.rate=0.8;
+    const voices = window.speechSynthesis.getVoices();
+    const v = voices.find(v=>v.lang.startsWith('ar'));
+    if(v) u.voice = v;
+    if(onend) u.onend = onend;
+    window.speechSynthesis.speak(u);
+    currentUtterance = u;
+  }
+}
+function toggleAudio(){ state.audioEnabled=!state.audioEnabled; document.getElementById('btnAudioToggle').innerText = state.audioEnabled?'🔊':'🔇'; if(!state.audioEnabled) window.speechSynthesis.cancel(); }
+function toggleFullscreen(){ if(!document.fullscreenElement){ document.documentElement.requestFullscreen().catch(()=>{}); } else if(document.exitFullscreen){ document.exitFullscreen(); } }
+
+function showScreen(id){
+  playSound('click'); window.speechSynthesis.cancel();
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  const t=document.getElementById(id); if(t) t.classList.add('active');
+  if(id==='learnScreen') renderLearnCards();
+  if(id==='readingScreen') renderStory();
+  if(id==='activitiesScreen') renderActivities();
+  if(id==='quizScreen') renderQuiz();
+  if(id==='vocabScreen') renderVocabTable();
+}
+function updateStatsUI(){
+  document.getElementById('valScore').innerText=state.score;
+  document.getElementById('valLives').innerText=state.lives;
+  document.getElementById('valStars').innerText=state.stars;
+  document.getElementById('progressBar').style.width = Math.min(100, state.score/2)+'%';
+}
+
+/* Learn cards */
+function renderLearnCards(){
+  const grid=document.getElementById('learnCardsGrid'); grid.innerHTML='';
+  VOCABULARY.forEach(item=>{
+    const card=document.createElement('div'); card.className='word-card';
+    card.onclick=()=>{ card.classList.add('playing'); speakArabic(item.word); playSound('click'); setTimeout(()=>card.classList.remove('playing'),1200); };
+    card.innerHTML = `<div class="card-svg-container">${item.svg}</div><div class="word-arabic ar">${item.word}</div><div class="word-meaning ml">${item.meaning}</div><button class="replay-btn">🔊 Listen</button>`;
+    grid.appendChild(card);
+  });
+}
+
+/* Poem rendering */
+function renderStory(){
+  const c=document.getElementById('storyContainer'); c.innerHTML='';
+  STORY.forEach((line,idx)=>{
+    const div=document.createElement('div'); div.className='story-para'+(line.refrain?' refrain':'');
+    div.innerHTML = `<p class="ar">${line.text}</p><button class="mini-play" onclick="speakArabic(this.dataset.t)" data-t="${line.text.replace(/"/g,'&quot;')}">🔊</button>`;
+    c.appendChild(div);
+  });
+}
+let storyReading=false;
+function readAllStory(){
+  if(storyReading){ window.speechSynthesis.cancel(); storyReading=false; return; }
+  storyReading=true; let i=0;
+  function next(){ if(i>=STORY.length || !storyReading){ storyReading=false; return; } speakArabic(STORY[i].text, ()=>{ i++; next(); }); }
+  next();
+}
+
+/* Activities (textbook based: pages 77-79) */
+function renderActivities(){
+  const c=document.getElementById('activitiesContainer'); c.innerHTML=`
+  <div class="activity-block">
+    <div class="activity-heading ar">1) نَضَعُ "خَزَانَتِي" مَكَانَ "حَصَّالَتِي" وَنُنْشِدُ</div>
+    <div class="activity-sub ml">"حَصَّالَتِي" എന്നതിന് പകരം "خَزَانَتِي" ഉപയോഗിച്ച് വരികൾ വീണ്ടും എഴുതുക</div>
+    <div class="poem-substitute-box ar">حَصَّالَتِي حَصَّالَتِي فِيهَا جَمَعْتُ ثَرْوَتِي</div>
+    <div class="poem-substitute-box ar">َكرِيمَة سَخِيَّة .......... .......... حَصَّالَتِي ثَرِيَّة</div>
+    <textarea class="fillbox" id="act1" placeholder="اُكْتُبْ الْبَيْتَيْنِ بَعْدَ التَّبْدِيلِ هُنَا..."></textarea>
+    <button class="check-btn" style="background:var(--purple);" onclick="toggleModelAnswer('act1Model')">💡 Show Model Answer</button>
+    <div class="model-answer-box ar" id="act1Model" style="display:none;">
+      <div class="model-answer-label">✅ Model Answer:</div>
+      خَزَانَتِي خَزَانَتِي فِيهَا جَمَعْتُ ثَرْوَتِي<br>خَزَانَتِي ثَرِيَّة َكرِيمَة سَخِيَّة
+    </div>
+  </div>
+
+  <div class="activity-block">
+    <div class="activity-heading ar">2) نُجِيبُ عَنِ الْأَسْئِلَةِ</div>
+    <div class="activity-sub ml">കവിതയെക്കുറിച്ചുള്ള ചോദ്യങ്ങൾക്ക് ഉത്തരം എഴുതുക</div>
+    <div class="word-bank ar"><span>ثَرْوَتَهُ</span><span>ثَرِيَّة، َكرِيمَة، سَخِيَّة، أَمِينَة، وَفِيَّة</span><span>تَرِنُّ</span><span>يَحِنُّ</span></div>
+    <div class="qa-row"><div class="qtxt ar">مَاذَا جَمَعَ الشَّاعِرُ فِي حَصَّالَتِهِ؟</div><input class="fillbox" id="act2a" data-ans="ثروته" placeholder="..."></div>
+    <div class="qa-row"><div class="qtxt ar">مَاذَا تَفْعَلُ نُقُودُ الْحَصَّالَةِ؟</div><input class="fillbox" id="act2b" data-ans="ترن" placeholder="..."></div>
+    <div class="qa-row"><div class="qtxt ar">َكيْفَ يَشْعُرُ قَلْبُ الشَّاعِرِ تُجَاهَ حَصَّالَتِهِ؟</div><input class="fillbox" id="act2c" data-ans="يحن" placeholder="..."></div>
+    <button class="check-btn" onclick="checkAct2()">✅ Check Answers</button>
+    <div class="result-msg" id="act2result"></div>
+  </div>
+
+  <div class="activity-block">
+    <div class="activity-heading ar">3) نَصِفُ الْحَصَّالَةَ (Describe the piggy bank)</div>
+    <div class="activity-sub ml">കവിതയിൽ ഹസ്സാലതിനെ വിശേഷിപ്പിക്കാൻ ഉപയോഗിച്ച 5 വാക്കുകൾ എഴുതുക</div>
+    <textarea class="fillbox" id="act3" placeholder="مِثَال: ثَرِيَّة، َكرِيمَة..."></textarea>
+    <button class="check-btn" style="background:var(--purple);" onclick="toggleModelAnswer('act3Model')">💡 Show Model Answer</button>
+    <div class="model-answer-box ar" id="act3Model" style="display:none;">
+      <div class="model-answer-label">✅ Model Answer:</div>
+      ثَرِيَّة - َكرِيمَة - سَخِيَّة - أَمِينَة - وَفِيَّة
+    </div>
+  </div>
+
+  <div class="activity-block">
+    <div class="activity-heading ar">4) نُكْمِلُ الْبَيْتَ مِنَ الْقَصِيدَةِ (Fill the missing word)</div>
+    <div class="activity-sub ml">ബാങ്കിൽ നിന്ന് ശരിയായ വാക്ക് തിരഞ്ഞെടുക്കുക</div>
+    <div class="word-bank ar"><span>تَرِنُّ</span><span>يَحِنُّ</span><span>رَحِيبٌ</span><span>عَجِيبٌ</span></div>
+    <div class="activity-line ar">فَخَّارُهَا <select class="fillbox" id="act4a" data-ans="عجيب"><option value="">---</option><option>تَرِنُّ</option><option>يَحِنُّ</option><option>رَحِيبٌ</option><option>عَجِيبٌ</option></select> وَصَدْرُهَا <select class="fillbox" id="act4b" data-ans="رحيب"><option value="">---</option><option>تَرِنُّ</option><option>يَحِنُّ</option><option>رَحِيبٌ</option><option>عَجِيبٌ</option></select></div>
+    <div class="activity-line ar">نُقُودُهَا <select class="fillbox" id="act4c" data-ans="ترن"><option value="">---</option><option>تَرِنُّ</option><option>يَحِنُّ</option><option>رَحِيبٌ</option><option>عَجِيبٌ</option></select> قَلْبِي لَهَا <select class="fillbox" id="act4d" data-ans="يحن"><option value="">---</option><option>تَرِنُّ</option><option>يَحِنُّ</option><option>رَحِيبٌ</option><option>عَجِيبٌ</option></select></div>
+    <button class="check-btn" onclick="checkAct4()">✅ Check Answers</button>
+    <div class="result-msg" id="act4result"></div>
+  </div>
+
+  <div class="activity-block">
+    <div class="activity-heading ar">5) نُنَاقِشُ (Discuss & Write)</div>
+    <div class="activity-sub ml">സ്വന്തം അഭിപ്രായത്തിൽ എഴുതുക</div>
+    <div class="activity-line ar">مَاذَا تَفْعَلُ بِنُقُودِكَ إذَا جَمَعْتَ ثَرْوَة فِي حَصَّالَتِكَ؟</div>
+    <textarea class="fillbox" id="act5" placeholder="اُكْتُبْ رَأْيَكَ هُنَا..."></textarea>
+    <button class="check-btn" style="background:var(--teal);" onclick="markDiscussDone('act5result')">✅ I have written my answer</button>
+    <div class="result-msg" id="act5result"></div>
+  </div>
+
+  <div class="activity-block">
+    <div class="activity-heading ar">6) نُمَارِسُ الْخَطَّ (Handwriting Practice)</div>
+    <div class="activity-sub ml">വാക്യം മൂന്ന് തവണയെങ്കിലും പകർത്തി എഴുതുക</div>
+    <div class="activity-line ar" style="background:#fff; border:2px dashed #B0BEC5; border-radius:10px; padding:10px; text-align:center;">رَمِيسٌ مُجْتَهِدٌ، يُحِبُّ جَدَّتَهُ َكثِيرًا</div>
+    <textarea class="fillbox" id="act6" placeholder="اُكْتُبْ هُنَا..." style="min-height:100px; margin-top:10px;"></textarea>
+    <button class="check-btn" style="background:var(--teal);" onclick="markDiscussDone('act6result')">✅ Done</button>
+    <div class="result-msg" id="act6result"></div>
+  </div>
+  `;
+}
+function toggleModelAnswer(id){
+  const el=document.getElementById(id);
+  const showing = el.style.display==='block';
+  el.style.display = showing ? 'none' : 'block';
+  if(!showing){ state.score+=5; updateStatsUI(); }
+}
+function normalizeAr(s){ return s.replace(/[\u064B-\u0652]/g,'').replace(/[إأآ]/g,'ا').replace(/ة/g,'ه').replace(/\s+/g,' ').trim(); }
+function checkAct2(){
+  const ids=['act2a','act2b','act2c']; let correct=0;
+  ids.forEach(id=>{ const el=document.getElementById(id); const ok = normalizeAr(el.value).includes(normalizeAr(el.dataset.ans));
+    if(ok){ el.style.borderColor='#4CAF50'; correct++; } else { el.style.borderColor='#F44336'; } });
+  const r=document.getElementById('act2result'); r.style.color = correct===3? '#2E7D32':'#C62828';
+  r.innerText = `Score: ${correct}/3 ${correct===3?'🎉 Excellent!':'— Try again, use the word bank!'}`;
+  if(correct===3){ state.score+=15; state.stars+=1; updateStatsUI(); playSound('correct'); } else { playSound('wrong'); }
+}
+function checkAct4(){
+  const ids=['act4a','act4b','act4c','act4d']; let correct=0;
+  ids.forEach(id=>{ const el=document.getElementById(id); const ok = normalizeAr(el.value)===normalizeAr(el.dataset.ans);
+    if(ok){ el.style.borderColor='#4CAF50'; correct++; } else { el.style.borderColor='#F44336'; } });
+  const r=document.getElementById('act4result'); r.style.color = correct===4? '#2E7D32':'#C62828';
+  r.innerText = `Score: ${correct}/4 ${correct===4?'🎉 Excellent!':'— Try again!'}`;
+  if(correct===4){ state.score+=20; state.stars+=1; updateStatsUI(); playSound('correct'); } else { playSound('wrong'); }
+}
+function markDiscussDone(id){
+  const r=document.getElementById(id); r.style.color='#2E7D32'; r.innerText='👍 Great job! Keep practicing.';
+  state.score+=10; updateStatsUI(); playSound('correct');
+}
+function checkGrammarTable(){
+  const sels=document.querySelectorAll('.gpSel'); let correct=0;
+  sels.forEach(s=>{ if(s.value===s.dataset.ans){ s.style.borderColor='#4CAF50'; correct++; } else { s.style.borderColor='#F44336'; } });
+  const r=document.getElementById('grammarResultMsg'); r.style.color = correct===sels.length?'#2E7D32':'#C62828';
+  r.innerText = `Score: ${correct}/${sels.length} ${correct===sels.length?'🎉 Excellent!':'— Try again!'}`;
+  if(correct===sels.length){ state.score+=20; state.stars+=1; updateStatsUI(); playSound('correct'); }
+}
+
+/* Vocabulary table */
+function renderVocabTable(){
+  const tb=document.getElementById('vocabTableBody'); tb.innerHTML='';
+  VOCAB_LIST.forEach(v=>{ tb.innerHTML += `<tr><td class="ar">${v[0]}</td><td class="ml">${v[2]}</td></tr>`; });
+}
+
+/* ===== GAMES (same 4-game engine) ===== */
+function launchGame(n){
+  state.activeGame=n; state.currentGameIndex=0;
+  state.gameQueue=[...VOCABULARY].sort(()=>Math.random()-0.5);
+  if(n===1) renderGame1(); else if(n===2) renderGame2(); else if(n===3) renderGame3(); else renderGame4();
+}
+function nextQuestion(){
+  state.currentGameIndex++;
+  if(state.currentGameIndex>=5 || state.currentGameIndex>=state.gameQueue.length){
+    state.stars+=1; updateStatsUI(); showRewardModal();
+  } else {
+    if(state.activeGame===1) renderGame1(); else if(state.activeGame===2) renderGame2(); else if(state.activeGame===3) renderGame3(); else renderGame4();
+  }
+}
+function handleAnswer(isCorrect, el){
+  if(isCorrect){ state.score+=10; playSound('correct'); if(el) el.classList.add('correct'); updateStatsUI(); setTimeout(nextQuestion,900); }
+  else { playSound('wrong'); if(el) el.classList.add('wrong'); state.lives--; updateStatsUI(); if(state.lives<=0){ setTimeout(()=>{ alert('Game Over! Try again.'); showScreen('homeScreen'); state.lives=3; updateStatsUI(); },500); } }
+}
+function renderGame1(){
+  showScreen('game1Screen');
+  const item=state.gameQueue[state.currentGameIndex];
+  document.getElementById('g1ImgBox').innerHTML=item.svg;
+  const options=[item.word];
+  while(options.length<4){ const r=VOCABULARY[Math.floor(Math.random()*VOCABULARY.length)].word; if(!options.includes(r)) options.push(r); }
+  options.sort(()=>Math.random()-0.5);
+  const grid=document.getElementById('g1OptionsGrid'); grid.innerHTML='';
+  options.forEach(opt=>{ const btn=document.createElement('button'); btn.className='option-btn ar'; btn.innerText=opt;
+    btn.onclick=()=>{ speakArabic(opt); handleAnswer(opt===item.word, btn); }; grid.appendChild(btn); });
+}
+let g2SelPic=null,g2SelWord=null,g2Matches=0;
+function renderGame2(){
+  showScreen('game2Screen'); g2SelPic=null; g2SelWord=null; g2Matches=0;
+  const items=state.gameQueue.slice(state.currentGameIndex, state.currentGameIndex+3);
+  const shuffledWords=[...items].sort(()=>Math.random()-0.5);
+  const pc=document.getElementById('g2PicsCol'), wc=document.getElementById('g2WordsCol'); pc.innerHTML=''; wc.innerHTML='';
+  items.forEach(item=>{ const d=document.createElement('div'); d.className='match-item'; d.dataset.id=item.id;
+    d.innerHTML=`<div class="svg-thumb">${item.svg}</div>`;
+    d.onclick=()=>{ playSound('click'); document.querySelectorAll('#g2PicsCol .match-item').forEach(e=>e.classList.remove('selected')); d.classList.add('selected'); g2SelPic=item.id; checkMatch(); };
+    pc.appendChild(d); });
+  shuffledWords.forEach(item=>{ const d=document.createElement('div'); d.className='match-item'; d.dataset.id=item.id;
+    d.innerHTML=`<div class="text-thumb ar">${item.word}</div>`;
+    d.onclick=()=>{ speakArabic(item.word); document.querySelectorAll('#g2WordsCol .match-item').forEach(e=>e.classList.remove('selected')); d.classList.add('selected'); g2SelWord=item.id; checkMatch(); };
+    wc.appendChild(d); });
+}
+function checkMatch(){
+  if(g2SelPic && g2SelWord){
+    if(g2SelPic===g2SelWord){
+      playSound('correct'); state.score+=10; g2Matches++;
+      const p=document.querySelector(`#g2PicsCol .match-item[data-id="${g2SelPic}"]`), w=document.querySelector(`#g2WordsCol .match-item[data-id="${g2SelWord}"]`);
+      if(p) p.classList.add('matched'); if(w) w.classList.add('matched');
+      g2SelPic=null; g2SelWord=null; updateStatsUI();
+      if(g2Matches>=3) setTimeout(nextQuestion,900);
+    } else {
+      playSound('wrong'); state.lives--; updateStatsUI();
+      const p=document.querySelector('#g2PicsCol .selected'), w=document.querySelector('#g2WordsCol .selected');
+      if(p) p.classList.add('wrong'); if(w) w.classList.add('wrong');
+      setTimeout(()=>{ if(p) p.classList.remove('selected','wrong'); if(w) w.classList.remove('selected','wrong'); g2SelPic=null; g2SelWord=null; },600);
+    }
+  }
+}
+function renderGame3(){
+  showScreen('game3Screen'); const item=state.gameQueue[state.currentGameIndex];
+  document.getElementById('g3ImgBox').innerHTML=item.svg;
+  document.getElementById('g3WordDisplay').innerText=item.missingDisplay;
+  const opts=['ح','ث','ن','ق','ف','خ','ص','د','أ','م','ك','ر']; const shuffled=[...new Set([item.missingLetter,...opts])].sort(()=>Math.random()-0.5).slice(0,4);
+  if(!shuffled.includes(item.missingLetter)) shuffled[0]=item.missingLetter;
+  const grid=document.getElementById('g3LettersGrid'); grid.innerHTML='';
+  shuffled.forEach(l=>{ const btn=document.createElement('button'); btn.className='letter-btn ar'; btn.innerText=l;
+    btn.onclick=()=>{ speakArabic(l); handleAnswer(l===item.missingLetter, btn); }; grid.appendChild(btn); });
+}
+let g4Letters=[];
+function renderGame4(){
+  showScreen('game4Screen'); const item=state.gameQueue[state.currentGameIndex]; g4Letters=[];
+  document.getElementById('g4ImgBox').innerHTML=item.svg;
+  const slotsDiv=document.getElementById('g4Slots'); slotsDiv.innerHTML='';
+  item.letters.forEach(()=>{ const s=document.createElement('div'); s.className='letter-slot'; slotsDiv.appendChild(s); });
+  const scrambled=[...item.letters].sort(()=>Math.random()-0.5);
+  const tilesDiv=document.getElementById('g4Tiles'); tilesDiv.innerHTML='';
+  scrambled.forEach(l=>{ const t=document.createElement('div'); t.className='tile-btn ar'; t.innerText=l;
+    t.onclick=()=>{ if(t.style.visibility==='hidden') return; speakArabic(l); playSound('click');
+      g4Letters.push(l); t.style.visibility='hidden';
+      const slots=document.querySelectorAll('.letter-slot'); slots[g4Letters.length-1].innerText=l;
+      if(g4Letters.length===item.letters.length){ const ok=g4Letters.join('')===item.letters.join(''); handleAnswer(ok,null); } };
+    tilesDiv.appendChild(t); });
+}
+function showRewardModal(){ playSound('fanfare'); document.getElementById('rewardModal').classList.add('active'); }
+function closeRewardModal(){ document.getElementById('rewardModal').classList.remove('active'); showScreen('homeScreen'); }
+
+/* ===== QUIZ (15 MCQs) ===== */
+const QUIZ = [
+ {q:'مَاذَا جَمَعَ الشَّاعِرُ فِي حَصَّالَتِهِ؟', opts:['كُتُبًا','ثَرْوَتَهُ','أَلْعَابًا','مَلَابِسَ'], ans:1},
+ {q:'مَنْ َكاتِبُ هٰذِهِ الْمَنْظُومَةِ؟', opts:['رَمِيس','مُحَمَّد الْفَاضِل سُلَيْمَان','عُمَر','وَلِيد'], ans:1},
+ {q:'صِفَةٌ وَاحِدَةٌ وَصَفَ بِهَا الشَّاعِرُ حَصَّالَتَهُ:', opts:['َكسُولَة','ثَرِيَّة','قَبِيحَة','بَعِيدَة'], ans:1},
+ {q:'بِمَاذَا يُبَاهِي الشَّاعِرُ إخْوَتَهُ؟', opts:['بِذَكَائِهِ','بِحَصَّالَتِهِ','بِمَلَابِسِهِ','بِسَيَّارَتِهِ'], ans:1},
+ {q:'َكيْفَ وَصَفَ الشَّاعِرُ فَخَّارَ الْحَصَّالَةِ؟', opts:['عَادِيّ','عَجِيبٌ','قَدِيم','مَ َكسُور'], ans:1},
+ {q:'َكيْفَ وَصَفَ الشَّاعِرُ صَدْرَ الْحَصَّالَةِ؟', opts:['ضَيِّق','رَحِيبٌ','صَغِير','بَارِد'], ans:1},
+ {q:'مَاذَا تَفْعَلُ نُقُودُ الْحَصَّالَةِ حَسَبَ الْمَنْظُومَةِ؟', opts:['تَنَامُ','تَرِنُّ','تَطِير','تَبْكِي'], ans:1},
+ {q:'َكيْفَ يَشْعُرُ قَلْبُ الشَّاعِرِ تُجَاهَ حَصَّالَتِهِ؟', opts:['يَخَافُ','يَحِنُّ لَهَا','يَغْضَبُ','يَنْسَاهَا'], ans:1},
+ {q:'أَيُّ َكلِمَةٍ تَتَ َكرَّرُ فِي بِدَايَةِ الْأَبْيَاتِ (refrain)؟', opts:['نُقُودِي','حَصَّالَتِي','ثَرْوَتِي','قَلْبِي'], ans:1},
+ {q:'أَيُّ صِفَةٍ تَعْنِي "أَمِينَة" فِي الْمَعْنَى؟', opts:['يُمْكِنُ الِاعْتِمَادُ عَلَيْهَا (trustworthy)','بَعِيدَة (far)','َكبِيرَة (big)','جَدِيدَة (new)'], ans:0},
+ {q:'مَعْنَى َكلِمَةِ "حَصَّالَةٌ" هُوَ:', opts:['സമ്പാദ്യപ്പെട്ടി (piggy bank)','പുസ്തകം (book)','വീട് (house)','മരം (tree)'], ans:0},
+ {q:'مَعْنَى َكلِمَةِ "نُقُودٌ" هُوَ:', opts:['നാണയങ്ങൾ (coins/money)','വസ്ത്രം (clothes)','ഭക്ഷണം (food)','കളിപ്പാട്ടം (toy)'], ans:0},
+ {q:'مَاذَا نَضَعُ مَكَانَ "حَصَّالَتِي" فِي نَشَاطِ الِاسْتِبْدَالِ؟', opts:['بَيْتِي','خَزَانَتِي','مَدْرَسَتِي','َكتَابِي'], ans:1},
+ {q:'الصِّفَةُ الْمُؤَنَّثَةُ تَنْتَهِي غَالِبًا بِـ:', opts:['و','ي','ة','ن'], ans:2},
+ {q:'أَيُّ َكلِمَةٍ فِي الْمَنْظُومَةِ تَعْنِي "الْمَالَ الَّذِي جُمِعَ"؟', opts:['فَخَّار','ثَرْوَة','صَدْر','عَجِيب'], ans:1}
+];
+function renderQuiz(){
+  state.quizSubmitted=false;
+  document.getElementById('quizScoreBox').style.display='none';
+  const c=document.getElementById('quizContainer'); c.innerHTML='';
+  QUIZ.forEach((item,qi)=>{
+    const qd=document.createElement('div'); qd.className='quiz-q';
+    qd.innerHTML = `<div class="qtext ar">${qi+1}. ${item.q}</div><div class="quiz-opts" id="qopts${qi}"></div>`;
+    c.appendChild(qd);
+    const od=qd.querySelector('#qopts'+qi);
+    item.opts.forEach((opt,oi)=>{
+      const b=document.createElement('div'); b.className='quiz-opt ar'; b.innerText=opt; b.dataset.qi=qi; b.dataset.oi=oi;
+      b.onclick=()=>{ if(state.quizSubmitted) return; document.querySelectorAll(`#qopts${qi} .quiz-opt`).forEach(e=>e.classList.remove('picked')); b.classList.add('picked'); playSound('click'); };
+      od.appendChild(b);
+    });
+  });
+}
+function submitQuiz(){
+  if(state.quizSubmitted) return; state.quizSubmitted=true;
+  let score=0;
+  QUIZ.forEach((item,qi)=>{
+    const opts=document.querySelectorAll(`#qopts${qi} .quiz-opt`);
+    const picked=document.querySelector(`#qopts${qi} .picked`);
+    if(picked && parseInt(picked.dataset.oi)===item.ans) score++;
+    opts.forEach(o=>{ if(parseInt(o.dataset.oi)===item.ans) o.classList.add('correct-ans'); else if(o.classList.contains('picked')) o.classList.add('wrong-ans'); });
+  });
+  state.score += score*10; state.stars += (score>=12?2:1); updateStatsUI();
+  const box=document.getElementById('quizScoreBox'); box.style.display='block';
+  box.innerHTML = `🏆 Your Score: ${score} / 15 ${score>=12?'— Excellent! 🎉':score>=8?'— Good job! 👍':'— Keep practicing! 💪'}`;
+  playSound(score>=12?'fanfare':'correct');
+}
+
+window.onload=function(){ updateStatsUI(); if('speechSynthesis' in window){ window.speechSynthesis.getVoices(); } };
+</script>
+</body>
+</html>
